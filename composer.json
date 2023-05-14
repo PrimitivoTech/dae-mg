@@ -1,5 +1,5 @@
 {
-    "name": "igrejanet/dae",
+    "name": "primitivo/dae",
     "description": "Pacote para geração de Documento de Arrecadação Estadual - MG",
     "type": "library",
     "license": "MIT",
@@ -11,10 +11,10 @@
     ],
     "minimum-stability": "stable",
     "require": {
-        "php": "^7.4|^8.0",
-        "nesbot/carbon": "^2.44",
-        "laminas/laminas-barcode": "^2.8",
+        "php": "^8.0",
         "ext-gd": "*",
+        "nesbot/carbon": "^2.44",
+        "laminas/laminas-barcode": "^2.12",
         "knplabs/knp-snappy": "^1.2",
         "h4cc/wkhtmltopdf-amd64": "0.12.x"
     },
