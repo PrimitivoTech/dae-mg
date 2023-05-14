@@ -3,7 +3,7 @@
 require_once('../vendor/autoload.php');
 
 use Carbon\Carbon;
-use Igrejanet\DAE\DAE;
+use Primitivo\DAE\DAE;
 
 $data = [
     // Dados do Sacado
