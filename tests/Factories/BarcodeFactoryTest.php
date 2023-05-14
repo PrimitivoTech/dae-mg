@@ -2,9 +2,9 @@
 
 namespace Tests\Factories;
 
-use Primitivo\DAE\Factories\BarcodeFactory;
 use Laminas\Barcode\Renderer\RendererInterface;
 use PHPUnit\Framework\TestCase;
+use Primitivo\DAE\Factories\BarcodeFactory;
 
 class BarcodeFactoryTest extends TestCase
 {

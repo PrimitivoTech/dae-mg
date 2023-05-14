@@ -2,8 +2,7 @@
 
 namespace Primitivo\DAE\Factories;
 
-use Primitivo\DAE\DAE;
-use Primitivo\DAE\Utils;
+use Primitivo\DAE\{DAE, Utils};
 use stdClass;
 
 /**

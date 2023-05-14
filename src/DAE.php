@@ -3,9 +3,9 @@
 namespace Primitivo\DAE;
 
 use Carbon\Carbon;
+use InvalidArgumentException;
 use Primitivo\DAE\Factories\LinhaDigitavelFactory;
 use Primitivo\DAE\Interfaces\Rederable;
-use InvalidArgumentException;
 use stdClass;
 
 /**

@@ -2,8 +2,8 @@
 
 namespace Tests;
 
-use Primitivo\DAE\Utils;
 use PHPUnit\Framework\TestCase;
+use Primitivo\DAE\Utils;
 
 class UtilsTest extends TestCase
 {

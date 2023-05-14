@@ -2,9 +2,8 @@
 
 namespace Tests\Factories;
 
-use Primitivo\DAE\Factories\BarcodeFactory;
-use Primitivo\DAE\Factories\ImageFactory;
 use PHPUnit\Framework\TestCase;
+use Primitivo\DAE\Factories\{BarcodeFactory, ImageFactory};
 
 class ImageFactoryTest extends TestCase
 {

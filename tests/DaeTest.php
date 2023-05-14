@@ -3,9 +3,9 @@
 namespace Tests;
 
 use Carbon\Carbon;
-use Primitivo\DAE\DAE;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
+use Primitivo\DAE\DAE;
 
 class DaeTest extends TestCase
 {
@@ -29,10 +29,10 @@ class DaeTest extends TestCase
             'valor'             => 90,
 
             // Dados repassados pelo estado de minas gerais
-            'codigoEstadual'    => 856,
-            'servico'           => 71,
-            'orgaoDestino'      => 321,
-            'empresa'           => '0213'
+            'codigoEstadual' => 856,
+            'servico'        => 71,
+            'orgaoDestino'   => 321,
+            'empresa'        => '0213',
         ];
 
         $dae = new DAE($data);
@@ -61,10 +61,10 @@ class DaeTest extends TestCase
             'valor'             => 90,
 
             // Dados repassados pelo estado de minas gerais
-            'codigoEstadual'    => 856,
-            'servico'           => 71,
-            'orgaoDestino'      => 321,
-            'empresa'           => '0213'
+            'codigoEstadual' => 856,
+            'servico'        => 71,
+            'orgaoDestino'   => 321,
+            'empresa'        => '0213',
         ];
 
         $dae = new DAE($data);
@@ -108,10 +108,10 @@ class DaeTest extends TestCase
             'historico'         => '',
 
             // Dados repassados pelo estado de minas gerais
-            'codigoEstadual'    => 856,
-            'servico'           => 71,
-            'orgaoDestino'      => 321,
-            'empresa'           => '0213'
+            'codigoEstadual' => 856,
+            'servico'        => 71,
+            'orgaoDestino'   => 321,
+            'empresa'        => '0213',
         ];
 
         $dae = new DAE($data);
