@@ -3,6 +3,8 @@
 namespace Primitivo\DAE;
 
 use ArrayAccess;
+use BackedEnum;
+use Carbon\Carbon;
 use JsonSerializable;
 
 /**
@@ -15,10 +17,11 @@ use JsonSerializable;
  */
 class Fluent implements ArrayAccess, JsonSerializable
 {
-    /**
-     * @var array<TKey, TValue>
-     */
+    /** @var array<TKey, TValue> */
     protected array $attributes = [];
+
+    /** @var array<string, string> */
+    protected $casts = [];
 
     /**
      * Create a new fluent instance.
@@ -64,7 +67,7 @@ class Fluent implements ArrayAccess, JsonSerializable
      */
     public function toArray(): array
     {
-        return $this->attributes;
+        return $this->castAttributes();
     }
 
     /**
@@ -168,5 +171,58 @@ class Fluent implements ArrayAccess, JsonSerializable
     public function __unset($key)
     {
         $this->offsetUnset($key);
+    }
+
+    protected function castAttributes(): array
+    {
+        $attributes = $this->attributes;
+
+        foreach ($this->casts as $attribute => $type) {
+            if (!array_key_exists($attribute, $attributes)) {
+                continue;
+            }
+
+            if ($this->isEnum($type)) {
+                $attributes[$attribute] = $this->castEnum($attributes[$attribute]);
+                continue;
+            }
+
+            [$type, $options] = explode(':', $type);
+
+            switch ($type) {
+                case 'int':
+                case 'integer':
+                    $attributes[$attribute] = (int)$attributes[$attribute];
+                    break;
+                case 'float':
+                case 'double':
+                    $attributes[$attribute] = (float)$attributes[$attribute];
+                    break;
+                case 'date':
+                    $attributes[$attribute] = $this->castDate($attributes[$attribute], $options);
+                    break;
+            }
+        }
+
+        return $attributes;
+    }
+
+    protected function isEnum($attribute): bool
+    {
+        return enum_exists($attribute);
+    }
+
+    protected function castEnum($attribute): string
+    {
+        return $attribute instanceof BackedEnum
+            ? $attribute->value
+            : $attribute->name;
+    }
+
+    protected function castDate(Carbon | string $attribute, string $format): string
+    {
+        return $attribute instanceof Carbon
+            ? $attribute->format($format)
+            : Carbon::parse($attribute)->format($format);
     }
 }

@@ -2,6 +2,7 @@
 
 use Carbon\Carbon;
 use Primitivo\DAE\DAE;
+use Primitivo\DAE\Enums\UF;
 
 it('should generate a new `DAE` instance', function () {
     $data = [
@@ -40,7 +41,7 @@ it('should test `DAE` getters', function () {
         'nome'      => 'Matheus Lopes Santos',
         'endereco'  => 'Rua dos Jesuítas, 88, Nª Sª das Graças',
         'municipio' => 'Montes Claros',
-        'uf'        => 'MG',
+        'uf'        => UF::MINAS_GERAIS,
         'telefone'  => '(38) 99183-9930',
         'documento' => '101.384.146-88',
 
@@ -62,21 +63,21 @@ it('should test `DAE` getters', function () {
     $dae = new DAE($data);
 
     expect($dae)->toBeInstanceOf(DAE::class)
-        ->getNome()->toBe($data['nome'])
-        ->getEndereco()->toBe($data['endereco'])
-        ->getMunicipio()->toBe($data['municipio'])
-        ->getUf()->toBe($data['uf'])
-        ->getTelefone()->toBe($data['telefone'])
-        ->getDocumento()->toBe($data['documento'])
-        ->getCobranca()->toBe($data['cobranca'])
-        ->getVencimento()->toBe($data['vencimento'])
-        ->getTipoIdentificacao()->toBe($data['tipoIdentificacao'])
-        ->getHistorico()->toBe($data['historico'])
-        ->getValor()->toBe((float)$data['valor'])
-        ->getCodigoEstadual()->toBe($data['codigoEstadual'])
-        ->getServico()->toBe($data['servico'])
-        ->getOrgaoDestino()->toBe($data['orgaoDestino'])
-        ->getEmpresa()->toBe($data['empresa']);
+        ->nome->toBe($data['nome'])
+        ->endereco->toBe($data['endereco'])
+        ->municipio->toBe($data['municipio'])
+        ->uf->toBe(UF::MINAS_GERAIS)
+        ->telefone->toBe($data['telefone'])
+        ->documento->toBe($data['documento'])
+        ->cobranca->toBe($data['cobranca'])
+        ->vencimento->toBeInstanceOf(Carbon::class)
+        ->tipoIdentificacao->toBe($data['tipoIdentificacao'])
+        ->historico->toBe($data['historico'])
+        ->valor->toBe((float)$data['valor'])
+        ->codigoEstadual->toBe($data['codigoEstadual'])
+        ->servico->toBe($data['servico'])
+        ->orgaoDestino->toBe($data['orgaoDestino'])
+        ->empresa->toBe($data['empresa']);
 });
 
 it('should throw an exception if dae does not have a value', function () {
