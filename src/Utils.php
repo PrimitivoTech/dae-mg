@@ -2,13 +2,6 @@
 
 namespace Primitivo\DAE;
 
-/**
- * Class Utils
- *
- * @author  Matheus Lopes Santos <fale_com_lopez@hotmail.com>
- * @version 2.0.0
- * @package Igrejanet\DAE
- */
 class Utils
 {
     public static function fillZero($input, int $length): string

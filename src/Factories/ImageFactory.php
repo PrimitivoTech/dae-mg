@@ -4,13 +4,6 @@ namespace Primitivo\DAE\Factories;
 
 use Laminas\Barcode\Renderer\RendererInterface;
 
-/**
- * ImageFactory
- *
- * @author  Matheus Lopes Santos <fale_com_lopez@hotmail.com>
- * @version 2.0.0
- * @package Igrejanet\Dae\Factories
- */
 class ImageFactory
 {
     public static function make(RendererInterface $barcode): string

@@ -5,13 +5,6 @@ namespace Primitivo\DAE\Factories;
 use Primitivo\DAE\{DAE, Utils};
 use stdClass;
 
-/**
- * LinhaDigitavelFactory
- *
- * @author  Matheus Lopes Santos <fale_com_lopez@hotmail.com>
- * @version 2.0.0
- * @package Igrejanet\Dae\Factories
- */
 class LinhaDigitavelFactory
 {
     public const VERSAO_DAE = 12;

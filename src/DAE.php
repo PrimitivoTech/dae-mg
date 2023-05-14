@@ -8,13 +8,6 @@ use Primitivo\DAE\Factories\LinhaDigitavelFactory;
 use Primitivo\DAE\Interfaces\Rederable;
 use stdClass;
 
-/**
- * Dae
- *
- * @author  Matheus Lopes Santos <fale_com_lopez@hotmail.com>
- * @version 2.0.0
- * @package Igrejanet\Dae
- */
 class DAE implements Rederable
 {
     use Renderer;
