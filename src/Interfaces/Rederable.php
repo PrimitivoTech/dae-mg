@@ -1,6 +1,6 @@
 <?php
 
-namespace Igrejanet\DAE\Interfaces;
+namespace Primitivo\DAE\Interfaces;
 
 /**
  * Interface Rederable

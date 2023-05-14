@@ -2,7 +2,7 @@
 
 namespace Tests;
 
-use Igrejanet\DAE\Utils;
+use Primitivo\DAE\Utils;
 use PHPUnit\Framework\TestCase;
 
 class UtilsTest extends TestCase

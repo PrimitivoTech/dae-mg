@@ -1,10 +1,10 @@
 <?php
 
-namespace Igrejanet\DAE;
+namespace Primitivo\DAE;
 
 use Carbon\Carbon;
-use Igrejanet\DAE\Factories\LinhaDigitavelFactory;
-use Igrejanet\DAE\Interfaces\Rederable;
+use Primitivo\DAE\Factories\LinhaDigitavelFactory;
+use Primitivo\DAE\Interfaces\Rederable;
 use InvalidArgumentException;
 use stdClass;
 

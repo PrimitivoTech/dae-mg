@@ -2,7 +2,7 @@
 
 namespace Tests\Factories;
 
-use Igrejanet\DAE\Factories\BarcodeFactory;
+use Primitivo\DAE\Factories\BarcodeFactory;
 use Laminas\Barcode\Renderer\RendererInterface;
 use PHPUnit\Framework\TestCase;
 

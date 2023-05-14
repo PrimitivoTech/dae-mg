@@ -20,7 +20,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Igrejanet\\DAE\\": "src/"
+            "Primitivo\\DAE\\": "src/"
         },
         "files": [
             "src/helpers.php"

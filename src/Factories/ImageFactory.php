@@ -1,6 +1,6 @@
 <?php
 
-namespace Igrejanet\DAE\Factories;
+namespace Primitivo\DAE\Factories;
 
 use Laminas\Barcode\Renderer\RendererInterface;
 

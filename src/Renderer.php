@@ -1,6 +1,6 @@
 <?php
 
-namespace Igrejanet\DAE;
+namespace Primitivo\DAE;
 
 use InvalidArgumentException;
 use Knp\Snappy\Pdf;

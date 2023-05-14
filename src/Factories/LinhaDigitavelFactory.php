@@ -1,9 +1,9 @@
 <?php
 
-namespace Igrejanet\DAE\Factories;
+namespace Primitivo\DAE\Factories;
 
-use Igrejanet\DAE\DAE;
-use Igrejanet\DAE\Utils;
+use Primitivo\DAE\DAE;
+use Primitivo\DAE\Utils;
 use stdClass;
 
 /**

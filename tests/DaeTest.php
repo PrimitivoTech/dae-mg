@@ -3,7 +3,7 @@
 namespace Tests;
 
 use Carbon\Carbon;
-use Igrejanet\DAE\DAE;
+use Primitivo\DAE\DAE;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 
