@@ -11,12 +11,12 @@ class LinhaDigitavelFactory
 
     public static function make(DAE $dae, string $nossoNumero): stdClass
     {
-        $inicio       = $dae->getCodigoEstadual();
-        $empresa      = $dae->getEmpresa();
-        $valor        = $dae->getValor();
-        $vencimento   = $dae->getVencimento()->format('ymd');
-        $orgaoDestino = $dae->getOrgaoDestino();
-        $taxa         = $dae->getTaxa();
+        $inicio       = $dae->codigoEstadual;
+        $empresa      = $dae->empresa;
+        $valor        = $dae->valor;
+        $vencimento   = $dae->vencimento->format('ymd');
+        $orgaoDestino = $dae->orgaoDestino;
+        $taxa         = $dae->taxa;
 
         // Deixamos o valor plano, sem pontuação, e preenche com zeros à esquerda
         $valor  = Utils::fillZero(preg_replace("/[^0-9]/", '', $valor), 11);
