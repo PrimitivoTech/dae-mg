@@ -5,7 +5,6 @@ namespace Primitivo\DAE;
 use Carbon\Carbon;
 use Primitivo\DAE\Enums\UF;
 use Primitivo\DAE\Factories\LinhaDigitavelFactory;
-use Primitivo\DAE\Interfaces\Rederable;
 use stdClass;
 
 /**
@@ -33,10 +32,8 @@ use stdClass;
  * @property int $codigoEstadual
  * @property bool $isento
  */
-class DAE extends Fluent implements Rederable
+class DAE extends Fluent
 {
-    use Renderer;
-
     protected array $attributes = [
         'taxa'   => 0,
         'isento' => true,
@@ -45,7 +42,8 @@ class DAE extends Fluent implements Rederable
     protected $casts = [
         'vencimento'    => 'date:d/m/Y',
         'mesReferencia' => 'date:m/Y',
-        'estado'        => UF::class,
+        'valor'         => 'float',
+        'uf'            => UF::class,
     ];
 
     /**
@@ -79,7 +77,6 @@ class DAE extends Fluent implements Rederable
     {
         parent::__construct($attributes);
 
-        $this->bootstrapPDFRenderer();
         $this->geraNossoNumero();
     }
 
