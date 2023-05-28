@@ -19,7 +19,7 @@ enum UF: string
     case PARA             = 'PA';
     case PARAIBA          = 'PB';
     case PARANA           = 'PR';
-    case PERNANBUCO       = 'PE';
+    case PERNAMBUCO       = 'PE';
     case PIAUI            = 'PI';
     case RIO_DE_JANEIRO   = 'RJ';
     case RIO_GRANDE_NORTE = 'RN';
