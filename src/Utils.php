@@ -53,11 +53,11 @@ class Utils
         $dig  = 0;
 
         for ($i = strlen($numero) - 1; $i >= 0; $i--) {
-            $somador = (substr($numero, $i, 1) * $mult);
+            $somador = ((int)substr($numero, $i, 1) * $mult);
 
             if ($somador > 9) {
                 for ($j = 0; $j < strlen($somador); $j++) {
-                    $dig = $dig + substr($somador, $j, 1);
+                    $dig = $dig + (int)substr($somador, $j, 1);
                 }
             } else {
                 $dig = $dig + $somador;
@@ -80,7 +80,7 @@ class Utils
         return $dig;
     }
 
-    public static function digitoVerificador($numero)
+    public static function digitoVerificador($numero): string
     {
         $dg10 = static::modulo10($numero);
         $dg11 = static::modulo11($numero . $dg10);
@@ -90,7 +90,7 @@ class Utils
 
     public static function nossoNumero(DAE $dae): string
     {
-        $nossoNumero = static::fillZero($dae->getServico(), 2) . static::fillZero($dae->getCobranca(), 9);
+        $nossoNumero = static::fillZero($dae->servico, 2) . static::fillZero($dae->cobranca, 9);
         $nossoNumero .= static::digitoVerificador($nossoNumero);
 
         return $nossoNumero;
