@@ -65,7 +65,8 @@ it('should check if variables will be transformed when calling `toArray` method'
         'empresa'           => '0213',
     ];
 
-    $dae = (new DAE($data))->toArray();
+    $dae = (new DAE($data))
+        ->toArray();
 
     expect($dae)->toBeArray()
         ->and($dae['nome'])->toBe($data['nome'])
@@ -85,31 +86,3 @@ it('should check if variables will be transformed when calling `toArray` method'
         ->and($dae['orgaoDestino'])->toBe($data['orgaoDestino'])
         ->and($dae['empresa'])->toBe($data['empresa']);
 });
-
-it('should throw an exception if dae does not have a value', function () {
-    $data = [
-        // Dados do Sacado
-        'nome'              => 'Matheus Lopes Santos',
-        'endereco'          => 'Rua dos Jesuítas, 88, Nª Sª das Graças',
-        'municipio'         => 'Montes Claros',
-        'uf'                => 'MG',
-        'telefone'          => '(38) 99183-9930',
-        'documento'         => '101.384.146-88',
-
-        // Dados da Cobrança
-        'cobranca'          => '201600180',
-        'vencimento'        => new Carbon('2019-01-10'),
-        'tipoIdentificacao' => 4,
-        'mesReferencia'     => Carbon::now()->format('m/Y'),
-        'historico'         => '',
-
-        // Dados repassados pelo estado de minas gerais
-        'codigoEstadual'    => 856,
-        'servico'           => 71,
-        'orgaoDestino'      => 321,
-        'empresa'           => '0213',
-    ];
-
-    $dae = new DAE($data);
-    $dae->toHTML();
-})->throws(InvalidArgumentException::class, 'É necessário informar um valor para geração do DAE')->skip();
