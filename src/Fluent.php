@@ -189,22 +189,20 @@ class Fluent implements ArrayAccess, JsonSerializable
 
             [$type, $options] = explode(':', $type);
 
-            switch ($type) {
-                case 'int':
-                case 'integer':
-                    $attributes[$attribute] = (int)$attributes[$attribute];
-                    break;
-                case 'float':
-                case 'double':
-                    $attributes[$attribute] = (float)$attributes[$attribute];
-                    break;
-                case 'date':
-                    $attributes[$attribute] = $this->castDate($attributes[$attribute], $options);
-                    break;
-            }
+            $attributes[$attribute] = $this->castAttribute($attributes[$attribute], $type, $options);
         }
 
         return $attributes;
+    }
+
+    protected function castAttribute(mixed $attribute, string $type, mixed $options = []): mixed
+    {
+        return match ($type) {
+            'int', 'integer' => (int)$attribute,
+            'float', 'double' => (float)$attribute,
+            'date'  => $this->castDate($attribute, $options),
+            default => $attribute,
+        };
     }
 
     protected function isEnum($attribute): bool
