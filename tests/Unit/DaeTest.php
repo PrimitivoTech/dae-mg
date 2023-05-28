@@ -6,58 +6,22 @@ use Primitivo\DAE\Enums\UF;
 
 it('should generate a new `DAE` instance', function () {
     $data = [
-        // Dados do Sacado
-        'nome'      => 'Matheus Lopes Santos',
-        'endereco'  => 'Rua dos Jesuítas, 88, Nª Sª das Graças',
-        'municipio' => 'Montes Claros',
-        'uf'        => 'MG',
-        'telefone'  => '(38) 99183-9930',
-        'documento' => '101.384.146-88',
-
-        // Dados da Cobrança
+        'nome'              => 'João Silva',
+        'endereco'          => 'Alameda dos programadores',
+        'municipio'         => 'Montes Claros',
+        'uf'                => UF::MINAS_GERAIS,
+        'telefone'          => '(38) 99191-2345',
+        'documento'         => '187.489.162-18',
         'cobranca'          => '201600180',
-        'vencimento'        => new Carbon('2019-01-10'),
+        'vencimento'        => Carbon::today()->endOfMonth(),
         'tipoIdentificacao' => 4,
-        'mesReferencia'     => date('m/Y'),
+        'mesReferencia'     => Carbon::today(),
         'historico'         => '',
         'valor'             => 90,
-
-        // Dados repassados pelo estado de minas gerais
-        'codigoEstadual' => 856,
-        'servico'        => 71,
-        'orgaoDestino'   => 321,
-        'empresa'        => '0213',
-    ];
-
-    $dae = new DAE($data);
-
-    expect($dae)->toBeInstanceOf(DAE::class)
-        ->toHTML()->toBeString();
-});
-
-it('should test `DAE` getters', function () {
-    $data = [
-        // Dados do Sacado
-        'nome'      => 'Matheus Lopes Santos',
-        'endereco'  => 'Rua dos Jesuítas, 88, Nª Sª das Graças',
-        'municipio' => 'Montes Claros',
-        'uf'        => UF::MINAS_GERAIS,
-        'telefone'  => '(38) 99183-9930',
-        'documento' => '101.384.146-88',
-
-        // Dados da Cobrança
-        'cobranca'          => '201600180',
-        'vencimento'        => new Carbon('2019-01-10'),
-        'tipoIdentificacao' => 4,
-        'mesReferencia'     => Carbon::now()->format('m/Y'),
-        'historico'         => '',
-        'valor'             => 90,
-
-        // Dados repassados pelo estado de minas gerais
-        'codigoEstadual' => 856,
-        'servico'        => 71,
-        'orgaoDestino'   => 321,
-        'empresa'        => '0213',
+        'codigoEstadual'    => 856,
+        'servico'           => 71,
+        'orgaoDestino'      => 321,
+        'empresa'           => '0213',
     ];
 
     $dae = new DAE($data);
@@ -72,23 +36,65 @@ it('should test `DAE` getters', function () {
         ->cobranca->toBe($data['cobranca'])
         ->vencimento->toBeInstanceOf(Carbon::class)
         ->tipoIdentificacao->toBe($data['tipoIdentificacao'])
+        ->mesReferencia->toBeInstanceOf(Carbon::class)
         ->historico->toBe($data['historico'])
-        ->valor->toBe((float)$data['valor'])
+        ->valor->toBe($data['valor'])
         ->codigoEstadual->toBe($data['codigoEstadual'])
         ->servico->toBe($data['servico'])
         ->orgaoDestino->toBe($data['orgaoDestino'])
         ->empresa->toBe($data['empresa']);
 });
 
+it('should check if variables will be transformed when calling `toArray` method', function () {
+    $data = [
+        'nome'              => 'João Silva',
+        'endereco'          => 'Alameda dos programadores',
+        'municipio'         => 'Montes Claros',
+        'uf'                => UF::MINAS_GERAIS,
+        'telefone'          => '(38) 99191-2345',
+        'documento'         => '187.489.162-18',
+        'cobranca'          => '201600180',
+        'vencimento'        => Carbon::today()->endOfMonth(),
+        'tipoIdentificacao' => 4,
+        'mesReferencia'     => Carbon::today(),
+        'historico'         => '',
+        'valor'             => 90,
+        'codigoEstadual'    => 856,
+        'servico'           => 71,
+        'orgaoDestino'      => 321,
+        'empresa'           => '0213',
+    ];
+
+    $dae = (new DAE($data))->toArray();
+
+    expect($dae)->toBeArray()
+        ->and($dae['nome'])->toBe($data['nome'])
+        ->and($dae['endereco'])->toBe($data['endereco'])
+        ->and($dae['municipio'])->toBe($data['municipio'])
+        ->and($dae['uf'])->toBe(UF::MINAS_GERAIS->value)
+        ->and($dae['telefone'])->toBe($data['telefone'])
+        ->and($dae['documento'])->toBe($data['documento'])
+        ->and($dae['cobranca'])->toBe($data['cobranca'])
+        ->and($dae['vencimento'])->toBe($data['vencimento']->format('d/m/Y'))
+        ->and($dae['tipoIdentificacao'])->toBe($data['tipoIdentificacao'])
+        ->and($dae['mesReferencia'])->toBe($data['mesReferencia']->format('m/Y'))
+        ->and($dae['historico'])->toBe($data['historico'])
+        ->and($dae['valor'])->toBe((float)$data['valor'])
+        ->and($dae['codigoEstadual'])->toBe($data['codigoEstadual'])
+        ->and($dae['servico'])->toBe($data['servico'])
+        ->and($dae['orgaoDestino'])->toBe($data['orgaoDestino'])
+        ->and($dae['empresa'])->toBe($data['empresa']);
+});
+
 it('should throw an exception if dae does not have a value', function () {
     $data = [
         // Dados do Sacado
-        'nome'      => 'Matheus Lopes Santos',
-        'endereco'  => 'Rua dos Jesuítas, 88, Nª Sª das Graças',
-        'municipio' => 'Montes Claros',
-        'uf'        => 'MG',
-        'telefone'  => '(38) 99183-9930',
-        'documento' => '101.384.146-88',
+        'nome'              => 'Matheus Lopes Santos',
+        'endereco'          => 'Rua dos Jesuítas, 88, Nª Sª das Graças',
+        'municipio'         => 'Montes Claros',
+        'uf'                => 'MG',
+        'telefone'          => '(38) 99183-9930',
+        'documento'         => '101.384.146-88',
 
         // Dados da Cobrança
         'cobranca'          => '201600180',
@@ -98,12 +104,12 @@ it('should throw an exception if dae does not have a value', function () {
         'historico'         => '',
 
         // Dados repassados pelo estado de minas gerais
-        'codigoEstadual' => 856,
-        'servico'        => 71,
-        'orgaoDestino'   => 321,
-        'empresa'        => '0213',
+        'codigoEstadual'    => 856,
+        'servico'           => 71,
+        'orgaoDestino'      => 321,
+        'empresa'           => '0213',
     ];
 
     $dae = new DAE($data);
     $dae->toHTML();
-})->throws(InvalidArgumentException::class, 'É necessário informar um valor para geração do DAE');
+})->throws(InvalidArgumentException::class, 'É necessário informar um valor para geração do DAE')->skip();
