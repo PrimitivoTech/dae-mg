@@ -2,14 +2,14 @@
 
 namespace Primitivo\DAE\Factories;
 
-use Primitivo\DAE\{DAE, Utils};
+use Primitivo\DAE\{LinhaDigitavel, DAE, Utils};
 use stdClass;
 
 class LinhaDigitavelFactory
 {
     public const VERSAO_DAE = 12;
 
-    public static function make(DAE $dae, string $nossoNumero): stdClass
+    public static function make(DAE $dae, string $nossoNumero): LinhaDigitavel
     {
         $inicio       = $dae->codigoEstadual;
         $empresa      = $dae->empresa;
@@ -33,11 +33,6 @@ class LinhaDigitavelFactory
         $barcode = BarcodeFactory::make($codigoBarra, 50);
         $image   = ImageFactory::make($barcode);
 
-        $barra                 = new stdClass();
-        $barra->linhaDigitavel = $linhaDigitavel;
-        $barra->numeroBarra    = $codigoBarra;
-        $barra->codigoImpresso = $image;
-
-        return $barra;
+        return new LinhaDigitavel($linhaDigitavel, $codigoBarra, $image);
     }
 }
