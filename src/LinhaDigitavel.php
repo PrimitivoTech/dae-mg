@@ -10,5 +10,6 @@ class LinhaDigitavel
         public readonly string $linhaDigitavel,
         public readonly string $numeroBarra,
         public readonly string $codigoImpresso,
-    ) {}
+    ) {
+    }
 }

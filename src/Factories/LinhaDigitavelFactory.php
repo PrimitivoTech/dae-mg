@@ -2,8 +2,7 @@
 
 namespace Primitivo\DAE\Factories;
 
-use Primitivo\DAE\{LinhaDigitavel, DAE, Utils};
-use stdClass;
+use Primitivo\DAE\{DAE, LinhaDigitavel, Utils};
 
 class LinhaDigitavelFactory
 {
