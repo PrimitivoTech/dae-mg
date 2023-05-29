@@ -20,3 +20,10 @@ it('should ensure that `nome` has up to 100 chars', function () {
     (new Validator(['nome' => str_repeat('a', 101)]))
         ->validate();
 })->throws(ValidationException::class, 'O nome deve ter no máximo 100 caracteres.');
+
+it('should ensure that `endereco` is required', function () {
+    (new Validator([
+        'nome'     => 'João Silva',
+        'endereco' => null,
+    ]))->validate();
+})->throws(ValidationException::class, 'O endereco é obrigatório.');

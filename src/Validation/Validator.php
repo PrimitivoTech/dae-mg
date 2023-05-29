@@ -4,8 +4,6 @@ declare(strict_types = 1);
 
 namespace Primitivo\DAE\Validation;
 
-use Primitivo\DAE\Exceptions\ValidationException;
-
 class Validator
 {
     use Concerns\InteractWithMessages;
