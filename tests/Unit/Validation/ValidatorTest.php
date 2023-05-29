@@ -27,3 +27,10 @@ it('should ensure that `endereco` is required', function () {
         'endereco' => null,
     ]))->validate();
 })->throws(ValidationException::class, 'O endereco é obrigatório.');
+
+it('should ensure that `municipio` is required', function () {
+    (new Validator([
+        'nome'     => 'João Silva',
+        'endereco' => 'Rua do programador',
+    ]))->validate();
+})->throws(ValidationException::class, 'O municipio é obrigatório.');

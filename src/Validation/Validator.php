@@ -58,7 +58,7 @@ class Validator
             return;
         }
 
-        $value = $this->attributes[$attribute];
+        $value = $this->attributes[$attribute] ?? null;
 
         $method = "validate" . ucfirst($rule);
 
