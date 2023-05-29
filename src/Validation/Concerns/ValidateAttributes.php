@@ -109,6 +109,16 @@ trait ValidateAttributes
         return is_string($value);
     }
 
+    public function validatePhone($value): bool
+    {
+        return (bool)preg_match('/^(?:(?:\+|00)?(55)\s?)?(?:\(?([1-9][0-9])\)?\s?)?(?:((?:9\d|[2-9])\d{3})\-?(\d{4}))$/', $value);
+    }
+
+    public function validateNullable(): bool
+    {
+        return true;
+    }
+
     public function parseDependentRuleParameters($parameters): array
     {
         $other = $this->attributes[$parameters[0]] ?? null;

@@ -14,7 +14,7 @@ class Validator
         'endereco'          => ['required'],
         'municipio'         => ['required'],
         'uf'                => ['required'],
-        'telefone'          => ['nullable'],
+        'telefone'          => ['nullable', 'phone'],
         'documento'         => ['required'],
         'servico'           => ['required', 'integer'],
         'cobranca'          => ['required', 'string'],

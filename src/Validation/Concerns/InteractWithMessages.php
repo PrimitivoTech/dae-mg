@@ -18,6 +18,7 @@ trait InteractWithMessages
         'float'       => 'O :attribute deve ser um número decimal.',
         'date_format' => 'O :attribute deve ser uma data válida, com formato :value.',
         'boolean'     => 'O :attribute deve ser um valor booleano.',
+        'phone'       => 'O :attribute deve ser um número de telefone válido.',
     ];
 
     private array $messages = [];
