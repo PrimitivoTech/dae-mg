@@ -25,7 +25,7 @@ use stdClass;
  * @property float $acrescimos
  * @property float $juros
  * @property string $nossoNumero
- * @property stdClass $linhaDigitavel
+ * @property LinhaDigitavel $linhaDigitavel
  * @property int $orgaoDestino
  * @property string $empresa
  * @property int $taxa
@@ -43,6 +43,8 @@ class DAE extends Fluent
         'vencimento'    => 'date:d/m/Y',
         'mesReferencia' => 'date:m/Y',
         'valor'         => 'float',
+        'acrescimos'    => 'float',
+        'juros'         => 'float',
         'uf'            => UF::class,
     ];
 
@@ -65,7 +67,6 @@ class DAE extends Fluent
      *     acrescimos: float,
      *     juros: float,
      *     nossoNumero: string,
-     *     linhaDigitavel: stdClass,
      *     orgaoDestino: int,
      *     empresa: string,
      *     taxa: int,

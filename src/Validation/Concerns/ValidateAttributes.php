@@ -17,33 +17,24 @@ trait ValidateAttributes
         }
     }
 
-    public function validateAlpha(string $attribute, mixed $value, array $parameters = []): bool
-    {
-        if (isset($parameters[0]) && $parameters[0] === 'ascii') {
-            return is_string($value) && preg_match('/\A[a-zA-Z]+\z/u', $value);
-        }
-
-        return is_string($value) && preg_match('/\A[\pL\pM]+\z/u', $value);
-    }
-
-    public function validateBoolean(string $attribute, mixed $value): bool
+    public function validateBoolean(mixed $value): bool
     {
         $acceptable = [true, false, 0, 1, '0', '1'];
 
         return in_array($value, $acceptable, true);
     }
 
-    public function validateInteger(string $attribute, mixed $value): bool
+    public function validateInteger(mixed $value): bool
     {
         return filter_var($value, FILTER_VALIDATE_INT) !== false;
     }
 
-    public function validateNumeric(string $attribute, mixed $value): bool
+    public function validateFloat(mixed $value): bool
     {
-        return is_numeric($value);
+        return is_float($value);
     }
 
-    public function validateRequired(string $attribute, mixed $value): bool
+    public function validateRequired(mixed $value): bool
     {
         if (is_null($value)) {
             return false;
@@ -56,19 +47,14 @@ trait ValidateAttributes
         return true;
     }
 
-    public function validateNullable(): bool
-    {
-        return true;
-    }
-
-    public function validateInArray($attribute, $value, $parameters): bool
+    public function validateInArray($value, $parameters): bool
     {
         $this->requireParameterCount(1, $parameters, 'in_array');
 
         return in_array($value, $parameters);
     }
 
-    public function validateDateFormat($attribute, $value, $parameters): bool
+    public function validateDateFormat($value, $parameters): bool
     {
         $this->requireParameterCount(1, $parameters, 'date_format');
 
@@ -89,5 +75,79 @@ trait ValidateAttributes
         }
 
         return false;
+    }
+
+    public function validateRequiredIf($attribute, $value, $parameters): bool
+    {
+        $this->requireParameterCount(2, $parameters, 'required_if');
+
+        if (!array_key_exists($parameters[0], $this->attributes)) {
+            return true;
+        }
+
+        [$values, $other] = $this->parseDependentRuleParameters($parameters);
+
+        if (in_array($other, $values, is_bool($other) || is_null($other))) {
+            return $this->validateRequired($attribute, $value);
+        }
+
+        return true;
+    }
+
+    public function validateMin(string $value, $parameter): bool
+    {
+        return mb_strlen($value) >= $parameter[0];
+    }
+
+    public function validateMax(string $value, $parameter): bool
+    {
+        return mb_strlen($value) <= $parameter[0];
+    }
+
+    public function validateString($value): bool
+    {
+        return is_string($value);
+    }
+
+    public function parseDependentRuleParameters($parameters): array
+    {
+        $other = $this->attributes[$parameters[0]] ?? null;
+
+        $values = array_slice($parameters, 1);
+
+        if ($this->shouldConvertToBoolean($parameters[0]) || is_bool($other)) {
+            $values = $this->convertValuesToBoolean($values);
+        }
+
+        if (is_null($other)) {
+            $values = $this->convertValuesToNull($values);
+        }
+
+        return [$values, $other];
+    }
+
+    protected function shouldConvertToBoolean($parameter): bool
+    {
+        return in_array('boolean', $this->rules[$parameter] ?? []);
+    }
+
+    protected function convertValuesToBoolean($values): array
+    {
+        return array_map(function ($value) {
+            if ($value === 'true') {
+                return true;
+            } elseif ($value === 'false') {
+                return false;
+            }
+
+            return $value;
+        }, $values);
+    }
+
+    protected function convertValuesToNull($values): array
+    {
+        return array_map(
+            fn ($value) => mb_strtolower($value) === 'null' ? null : $value, $values
+        );
     }
 }
